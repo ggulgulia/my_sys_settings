@@ -2,6 +2,10 @@ set autoindent      "Keep indentation from previous line
 set smartindent     "Automatically inserts indentation in some cases
 set cindent         "Like smartindent, but stricter and more customisable
 
+"cursor hilighting
+windo set cursorline
+hi CursorLine term=bold cterm=bold guibg=Grey40
+
 set nocompatible              " be iMproved, required
     filetype off                  " required
 
@@ -99,3 +103,31 @@ execute pathogen#infect()
     let g:syntastic_auto_loc_list = 1
     let g:syntastic_check_on_open = 1
     let g:syntastic_check_on_wq = 0
+
+
+"mapping tab commands"
+map <C-Right> :tabn<CR>
+map <C-Left> :tabp<CR>
+map <C-t> :tabnew<CR>
+
+
+"mapping NERDTree toggeling"
+map <F2> :NERDTreeToggle<CR>
+
+"toggling line numbering"
+nmap <silent> <S-n>  : set number! number?<cr>
+
+"toggling relative line numbering"
+function! NumberToggle()
+    if(&nu==1)
+        set nu!
+        set rnu
+    else
+        set nornu
+        set nu
+    endif
+endfunction
+nnoremap <S-n><S-r> : call NumberToggle()<CR>
+
+"toggling scroll binding"
+noremap <silent> <S-b> : windo set scrollbind! scrollbind?<cr>

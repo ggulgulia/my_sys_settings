@@ -122,10 +122,11 @@ alias of211='source /opt/OpenFOAM-2.1.1/etc/bashrc '
 
 # library path for OpenMPI-3.0
 export PATH=$PATH:$../../usr/local/openMPI3.0/bin 
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$../../usr/local/openMPI3.0/lib 
+export PYTHONPATH=$HOME/WS2018_Thesis/peridym/Python:$PYTHONPATH
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$../../usr/local/openMPI3.0/lib:$../../usr/lib/x86_64-linux-gnu/:$../../usr/local/lib/ 
 
 ## settings for python
-alias python=python3.5
+##alias python=python3.5
 
 ## alias for g++-7 -std=c++17
 alias c++17='g++-7 -std=c++17'
