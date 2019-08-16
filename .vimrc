@@ -2,6 +2,10 @@ set autoindent      "Keep indentation from previous line
 set smartindent     "Automatically inserts indentation in some cases
 set cindent         "Like smartindent, but stricter and more customisable
 
+" need this line for vim 8.1 nerd tree issues where ^G is being
+" prefixed to each file name and syntax hilghting doesn't work
+syn on
+
 "cursor hilighting
 windo set cursorline
 hi CursorLine term=bold cterm=bold guibg=Grey40
@@ -20,11 +24,13 @@ set nocompatible              " be iMproved, required
 
     "auto complete plugin 
     Plugin 'Valloric/YouCompleteMe'
+    let g:ycm_global_ycm_extra_conf = '~/.vim/bundle/YouCompleteMe/.ycm_extra_conf.py'
     let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
      let g:ycm_semantic_triggers = {
              \ 'tex'  : ['{']
          \}
-     let g:ycm_show_diagnostics_ui = 0
+
+     Plugin 'ajh17/VimCompletesMe'
 
     " Plugin for do quick snipest """"""""""""""""""""""""""""""""""""""""""
     " " Track the engine.
@@ -42,11 +48,23 @@ set nocompatible              " be iMproved, required
     Plugin 'tpope/vim-fugitive'
     " Git plugin not hosted on GitHub
     Plugin 'git://git.wincent.com/command-t.git'
+
+    
+    Plugin 'scrooloose/syntastic'
+
+    Plugin 'vhdirk/vim-cmake'
+
+    " highlights the all the word at the cursor in the current buffer
+    Plugin 'RRethy/vim-illuminate'
+
+    " plugin to pulse everytime a search result is scrolled through
+    Plugin 'inside/vim-search-pulse'
+    let g:vim_search_pulse_duration = 200
     
     "plugin for nerd tree 
     Plugin 'scrooloose/nerdtree'
     " git repos on your local machine (i.e. when working on your own plugin)
-    Plugin 'file:///home/gmarik/path/to/plugin'
+    ""Plugin 'file:///home/gmarik/path/to/plugin'""
     " The sparkup vim script is in a subdirectory of this repo called vim.
     " Pass the path to set the runtimepath properly.
     Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
@@ -54,7 +72,7 @@ set nocompatible              " be iMproved, required
     Plugin 'user/L9', {'name': 'newL9'}
     
     "new plugins on 17/10/
-    " Plugin to show a status bar
+    " plugin to show a status bar
      Plugin 'vim-airline/vim-airline'
      Plugin 'vim-airline/vim-airline-themes'
     " All of your Plugins must be added before the following line
@@ -87,9 +105,9 @@ autocmd VimEnter * NERDTree
 "making NERDTree Pritter
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
-let g:ycm_global_ycm_extra_conf = '~/.ycm_extra_conf.py'
 
 "for Pathogen"
+set nocp
 execute pathogen#infect()
 
 "for syntastic plugin"
@@ -106,8 +124,8 @@ execute pathogen#infect()
 
 
 "mapping tab commands"
-map <C-Right> :tabn<CR>
-map <C-Left> :tabp<CR>
+map <C-l> :tabn<CR>
+map <C-h> :tabp<CR>
 map <C-t> :tabnew<CR>
 
 
@@ -131,3 +149,6 @@ nnoremap <S-n><S-r> : call NumberToggle()<CR>
 
 "toggling scroll binding"
 noremap <silent> <S-b> : windo set scrollbind! scrollbind?<cr>
+
+" open the command prompt with vim in a vertical split
+nnoremap vterm : vert term
